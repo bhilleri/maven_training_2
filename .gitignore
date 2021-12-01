@@ -1,3 +1,5 @@
 # IntelliJ
 .idea/
 *.iml
+sample/target/
+lernejo-tester/target/
