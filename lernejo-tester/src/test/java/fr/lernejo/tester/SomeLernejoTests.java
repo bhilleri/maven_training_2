@@ -10,9 +10,9 @@ public class SomeLernejoTests {
     }
     @TestMethod
     public void ko(){
-
+        throw (new java.lang.IllegalStateException());
     }
     public void none(){
-        throw (new java.lang.IllegalStateException());
+
     }
 }
