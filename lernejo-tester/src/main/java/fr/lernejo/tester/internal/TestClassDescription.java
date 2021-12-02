@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 
 public class TestClassDescription {
     private Class<?>  targetClass;
+    public Class<?> getTargetClass(){
+        return this.targetClass;
+    }
 
     public TestClassDescription(Class<?> targetClass){
         this.targetClass = targetClass;

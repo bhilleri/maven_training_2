@@ -15,14 +15,14 @@ public class TestRunner {
         long timeTest = System.currentTimeMillis();
         failure.set(0);
         success.set(0);
+
         for (String arg : args) {
-            arg = "fr.lernejo.tester";
             TestClassDiscoverer testClassDiscoverer = new TestClassDiscoverer(arg);
             List<TestClassDescription> listTestClassDescription =  testClassDiscoverer.listTestClasses();
             listTestClassDescription.forEach(( TestClassDescription testClassDescription)->{
-            long timeBeginMethodeTest =0;
+                long timeBeginMethodeTest =0;
                 try {
-                    Object testInstance = testClassDescription.getClass().getDeclaredConstructor().newInstance();
+                    Object testInstance = testClassDescription.getTargetClass().getConstructor().newInstance();
 
                     for (Method testMethod : testClassDescription.listTestMethods()) {
 
@@ -31,13 +31,15 @@ public class TestRunner {
                             timeBeginMethodeTest = System.currentTimeMillis();
                             testMethod.invoke(testInstance);
                             long duration = System.currentTimeMillis() - timeBeginMethodeTest;
-                            System.out.println(testMethod.getName()+ " OK " + duration +" ms" );
+                            String nameOfClass = testMethod.getDeclaringClass().getName().replace("class ","");;
+                            System.out.println(nameOfClass+"#" +testMethod.getName()+ " OK " + duration +" ms" );
                             success.getAndIncrement();
                         }
                         catch (InvocationTargetException e)
                         {
                             long duration = System.currentTimeMillis() - timeBeginMethodeTest;
-                            System.out.println(testMethod.getName()+ " KO " + duration +" ms" );
+                            String nameOfClass = testMethod.getDeclaringClass().getName().replace("class ","");;
+                            System.out.println(nameOfClass+"#" + testMethod.getName()+ " KO " + duration +" ms" );
                             failure.getAndIncrement();
                         }
                     }
@@ -54,6 +56,6 @@ public class TestRunner {
             });
         }
         System.out.println();
-        System.out.println("test : " + success.get()+failure.get() + ", succés : " + success.get() + ", échec : " + failure.get() + ", temps total : " + (System.currentTimeMillis()- timeTest) + " ms");
+        System.out.println("test : " + (success.get()+failure.get()) + ", succes : " + success.get() + ", echec : " + failure.get() + ", temps total : " + (System.currentTimeMillis()- timeTest) + " ms");
     }
 }
