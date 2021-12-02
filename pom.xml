@@ -24,6 +24,17 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <reflections.version>0.10.2</reflections.version>
     </properties>
+
+    <dependencyManagement>  <!--(1)-->
+        <dependencies>
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

@@ -1,6 +1,7 @@
 package fr.lernejo.tester.internal;
 
 import fr.lernejo.tester.SomeLernejoTests;
+import fr.lernejo.tester.api.TestMethod;
 
 import java.lang.reflect.Method;
 
@@ -11,5 +12,10 @@ public class TestClassDescriptionLernejoTests {
         testClassDescription.listTestMethods().forEach((Method method)->{
             System.out.print(method.toString() + " ");
         });
+
+    }
+    @TestMethod
+    public void test(){
+
     }
 }
